@@ -1,0 +1,8 @@
+server:
+  port: 8082
+mongo_db:
+  db: ${landlord_mongo_db}
+  port: ${landlord_mongo_port}
+  host: ${landlord_mongo_host}
+  username: ${landlord_mongo_username}
+  password: ${landlord_mongo_password}
