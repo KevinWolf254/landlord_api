@@ -1,13 +1,15 @@
 package co.ke.proaktivio.services;
 
+import java.util.Optional;
+
 import co.ke.proaktivio.models.domain.Agency;
-import reactor.core.publisher.Flux;
+import co.ke.proaktivio.models.pojos.Response;
 import reactor.core.publisher.Mono;
 
 public interface AgencyService {
 
-	public Mono<Agency> save(Agency agency);
-	public Mono<Agency> findByPayBillNumber(String payBillNumber);
-	public Flux<Agency> findAll();
-	public Mono<Void> deleteById(String id);
+	public Mono<Response> save(Agency agency);
+	public Mono<Response> find(Optional<String> payBillNumber);
+//	public Flux<Agency> findAll();
+	public Mono<Response> deleteById(String id);
 }
