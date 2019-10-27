@@ -13,15 +13,47 @@ mongo
 4. show databases
 show dbs
 
-5. use admin inorder to create username and password
+5. use admin in order to create username and password
 use admin
 
-6. create user
+6. create superuser authorised by admin database
 db.createUser(
   {
     user: "kevin",
     pwd: "admin",
     roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+6.1 create user for a specific database as an administrator
+6.1.1 login as super user
+mongo -u kevin -p admin --authenticationDatabase admin
+6.1.2 use database
+use property
+6.1.3 create user
+db.createUser(
+  {
+    user: "kevin",
+    pwd: "kevin",
+    roles: [ { role: "userAdmin", db: "property" } ]
+  }
+)
+
+6.2 create user for a specific database with readWrite permissions
+db.createUser(
+  {
+    user: "kanyi",
+    pwd: "kevin",
+    roles: [ { role: "readWrite", db: "property" } ]
+  }
+)
+
+6.3 create user for a specific database with read permissions
+db.createUser(
+  {
+    user: "mbugua",
+    pwd: "kevin",
+    roles: [ { role: "read", db: "property" } ]
   }
 )
 
