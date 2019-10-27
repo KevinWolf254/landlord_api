@@ -24,7 +24,7 @@ public class AgencyRouter {
 				.path("/agency", builder -> builder
 								.GET("", handler::find)
 								.POST("", RequestPredicates.accept(MediaType.APPLICATION_JSON), handler::save)
-								.DELETE("", handler::delete))
+								.DELETE("/{id}", handler::delete))
 				.build();
 	}
 }
