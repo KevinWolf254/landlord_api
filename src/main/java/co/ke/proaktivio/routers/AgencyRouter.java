@@ -14,12 +14,6 @@ import co.ke.proaktivio.handlers.AgencyHandler;
 public class AgencyRouter {
 	@Bean
 	public RouterFunction<ServerResponse> route(AgencyHandler handler) {
-//		return RouterFunctions
-//				.route(RequestPredicates.GET("/agency"), handler::find)
-////				.andRoute(RequestPredicates.GET("/agency/payBill"), handler::findByPaybillNumber)
-//				.andRoute(RequestPredicates.POST("/agency"), handler::save)
-//				.andRoute(RequestPredicates.DELETE("/agency"), handler::delete);
-
 		return RouterFunctions.route()
 				.path("/agency", builder -> builder
 								.GET("", handler::find)

@@ -21,10 +21,8 @@ public class AgencyServiceImpl implements AgencyService {
 	@Override
 	public Mono<Agency> save(Agency agency) {
 		return agencyRepository.save(agency)
-				.onErrorResume(e -> {
-					log.error(e.hashCode() + e.getMessage());
-					return Mono.error(e);
-				});
+				.doOnError(e -> log.error("Error :: " + e.getClass() + " :: Message :: " + e.getMessage()))
+				.onErrorResume(e -> Mono.error(e));
 	}
 
 	@Override
@@ -44,50 +42,8 @@ public class AgencyServiceImpl implements AgencyService {
 	@Override
 	public Mono<Void> delete(String id) {
 		return agencyRepository.deleteById(id)
-				.onErrorResume(e -> {
-					log.error("Error :::: " + e.hashCode() + e.getMessage());
-					return Mono.error(e);
-				});
+				.doOnError(e -> log.error("Error :: " + e.getClass() + " :: Message :: " + e.getMessage()))
+				.onErrorResume(e -> Mono.error(e));
 	}
-
-//	@Override
-//	public Mono<ResultModel> save(Agency agency) {
-//		return agencyRepository.save(agency).flatMap(result -> {
-//			final List<Object> agencies = new ArrayList<Object>();
-//			agencies.add(result);
-//			return Mono.just(ResultModel.builder()
-//					.status(HttpStatus.OK)
-//					.isSuccess(true)
-//					.message("success")
-//					.data(agencies).build());
-//		});
-//	}
-//
-//	@Override
-//	public Mono<ResultModel> find(Optional<String> payBillNumber) {
-////		if (payBillNumber.isPresent())
-//			return agencyRepository.findByPayBillNumber(payBillNumber.get())
-//					.flatMap(result -> {
-//						final List<Object> agencies = new ArrayList<Object>();
-//						agencies.add(result);
-//		
-//						return Mono.just(ResultModel.builder()
-//											.status(HttpStatus.OK)
-//											.isSuccess(true)
-//											.message("success")
-//											.data(agencies).build());
-//					});
-////		return Mono.empty();
-//	}
-//
-//	@Override
-//	public Mono<ResultModel> deleteById(String id) {
-//		return agencyRepository.deleteById(id).flatMap(v -> {
-//			return Mono.just(ResultModel.builder()
-//								.status(HttpStatus.OK)
-//								.isSuccess(true)
-//								.message("success").build());
-//		});
-//	}
 
 }
